@@ -1,6 +1,6 @@
 # Simulating choice model of graph edge formation.
 
-This repository contains partial code to the following paper:
+This repository contains partial code base to the following paper:
 
 Scaling choice models of relational social data - Jan Overgoor, George Pakapol Supaniratisai, Johan Ugander. (KDD, 2020)
 
