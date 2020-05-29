@@ -1,0 +1,8 @@
+num_er_edges	25000
+choice_edges_path	choice_edges.npy
+graph_seed	1411022215
+num_choice_edges	80000
+logging_interval	1000.0
+time_elapsed	108.109140158
+er_edges_path	er_edges.npy
+num_nodes	5000
