@@ -6,7 +6,7 @@ Scaling choice models of relational social data - Jan Overgoor, George Pakapol S
 
 The code base contains the synthetic graph experiments portion of the paper. In this part, we used the following versions of external python libraries:
 
-`numpy=1.18.1`
-`scipy=1.2.0`
+- `numpy=1.18.1`
+- `scipy=1.2.0`
 
 The main repository for this paper is at 
