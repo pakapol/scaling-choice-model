@@ -82,31 +82,31 @@ def write_csv(filename, kwargs_list, result):
       row.extend(info['weights'])
       row.extend(info['se'])
       f.write(','.join(map(str, row)) + '\n')
-
+  
 def fig_3a_3b():
   result = None
-  kwargs_list = [{'n':n, 's':s, 'sampling':sampling, 'i':i, 'graph_id':parse_info(PATH)['seed'], \
+  kwargs_list = [{'n':n, 's':s, 'sampling':sampling, 'i':i, 'graph_id':parse_info(PATH)['graph_seed'], \
                   'feature_seed': random.randint(0, 2**31-1),'edge_sampling':'first-n'} \
-                  for n,s,sampling,i in product([24,96], range(500,5001,500), ['uniform','stratified'], range(50))]
-  with Pool(48) as p:
+                  for n,s,sampling,i in product(range(500,5001,500), [24,96], ['uniform','stratified'], range(50))]
+  with Pool(4) as p:
     result = p.map(experiment, kwargs_list)
   write_csv('synthetic-vary-n-and-s-very-small.csv', kwargs_list, result)
 
 def fig_3c():
   result = None
-  kwargs_list = [{'n':10000, 's':s, 'sampling':sampling, 'i':i, 'graph_id':parse_info(PATH)['seed'], \
+  kwargs_list = [{'n':10000, 's':s, 'sampling':sampling, 'i':i, 'graph_id':parse_info(PATH)['graph_seed'], \
                   'feature_seed': random.randint(0, 2**31-1),'edge_sampling':'first-n'} \
                   for s,sampling,i in product([3,6,12,24,48,96,192,384,768], ['uniform','stratified','importance'], range(50))]
-  with Pool(48) as p:
+  with Pool(4) as p:
     result = p.map(experiment, kwargs_list)
   write_csv('synthetic-fix-n-10k.csv',kwargs_list, result)
 
 def fig_3d():
   result = None
-  kwargs_list = [{'n':480000//s, 's':s, 'sampling':sampling, 'i':i, 'graph_id':parse_info(PATH)['seed'], \
+  kwargs_list = [{'n':480000//s, 's':s, 'sampling':sampling, 'i':i, 'graph_id':parse_info(PATH)['graph_seed'], \
                   'feature_seed': random.randint(0, 2**31-1),'edge_sampling':'random-uniform'} \
                    for s,sampling,i in product([3,6,12,24,48,96,192,384,768], ['uniform','stratified','importance'], range(50))]
-  with Pool(48) as p:
+  with Pool(4) as p:
     result = p.map(experiment, kwargs_list)
   write_csv('synthetic-fix-ns-480k-randedge.csv',kwargs_list, result)
 

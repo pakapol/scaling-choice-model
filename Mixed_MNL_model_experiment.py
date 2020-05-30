@@ -74,21 +74,20 @@ def experiment_1cl(kwargs):
 
 def experiment_2cl(kwargs):
   X, lnsw = extract_feature(**kwargs)
-  print(X.shape, lnsw.shape)
   y = np.zeros(X.shape[0]).astype(int)
 
-  ffof = X[:,0,5] + X[:,0,6] + X[:,0,8]
+  ffof = X[:,0,8]
   ind_1 = ffof > 0.5 # local (ffof)
   ind_2 = ffof < 0.5 # non-local
 
   m1 = MNLogit()
-  sws_filter_1 = (X[ind_1,:,5] + X[ind_1,:,6] + X[ind_1,:,8]) < 0.5
+  sws_filter_1 = X[ind_1,:,8] < 0.5
   m1.data(X[ind_1,:,:-1], y[ind_1], sws=lnsw[ind_1] - 10000 * sws_filter_1)
   m1.fit(max_num_iter=500, clip=1.0, clip_norm_ord=2)
   info1 = m1.get_model_info()
 
   m2 = MNLogit()
-  sws_filter_2 = (X[ind_2,:,5] + X[ind_2,:,6] + X[ind_2,:,8]) > 0.5
+  sws_filter_2 = X[ind_2,:,8] > 0.5
   m2.data(X[ind_2][...,[0,4]], y[ind_2], sws=lnsw[ind_2] - 10000 * sws_filter_2)
   m2.fit(max_num_iter=500, clip=1.0, clip_norm_ord=2)
   info2 = m2.get_model_info()
@@ -111,7 +110,7 @@ def write_csv(filename, kwargs_list, result):
 
 def fig_4a_4b():
   result = None
-  kwargs_list = [{'n':80000, 's':s, 'sampling':sampling, 'i':i, 'graph_id':parse_info(PATH)['seed'], \
+  kwargs_list = [{'n':80000, 's':s, 'sampling':sampling, 'i':i, 'graph_id':parse_info(PATH)['graph_seed'], \
                   'feature_seed': random.randint(0, 2**31-1),'edge_sampling':'first-n'} \
                   for s,sampling,i in product([16,32,64,128,256,512,1024], ['uniform','stratified'], range(20))]
   with Pool(48) as p:
@@ -121,7 +120,7 @@ def fig_4a_4b():
 
 def fig_4c_4d():
   result = None
-  kwargs_list = [{'n':80000, 's':s, 'sampling':sampling, 'i':i, 'graph_id':parse_info(PATH)['seed'], \
+  kwargs_list = [{'n':80000, 's':s, 'sampling':sampling, 'i':i, 'graph_id':parse_info(PATH)['graph_seed'], \
                   'feature_seed': random.randint(0, 2**31-1),'edge_sampling':'first-n'} \
                   for s,sampling,i in product([16,32,64,128,256,512,1024], ['uniform','stratified'], range(20))]
   with Pool(48) as p:
