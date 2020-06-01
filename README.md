@@ -17,5 +17,21 @@ In this part, we used the following versions of external python libraries:
 
 - `numpy=1.18.1`
 - `scipy=1.2.0`
+- `torch=0.4.0` (to accelerate the optimizing routine)
 
+To generate data for figure 3 for conditional logit on synthetic graph, run:
+
+    ```
+    mkdir ~/MNL-graph
+    python3 generate_MNL_graph.py
+    python3 MNL_model_experiment.py
+    ```
+To generate data for figure 4 for demixing mixed logit on synthetic graph, run:
+
+    ```
+    mkdir ~/Mixed-MNL-graph
+    python3 generate_Mixed_MNL_graph.py
+    python3 Mixed_MNL_model_experiment.py
+    ```
+    
 The main repository for this paper is located <a href="https://github.com/janovergoor/choose2grow">here</a>.
