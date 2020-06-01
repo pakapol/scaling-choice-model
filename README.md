@@ -39,6 +39,6 @@ Likewise, to generate data for figure 4 for demixing mixed logit on synthetic gr
     ```    
     
 * Running this will generate another graph in the folder `Mixed-MNL-graph` and run all experiments in the one-mode conditional logit section.
-* In `Mixed-MNL_model_experiment.py` there are 2 commands: `fig_4a_4b()` and `fig_4c_4d()`, which can be imported as a module function to a separate file to generate  `synthetic-ml-on-1cl.csv` and `synthetic-ml-on-2cl.csv` respectively in this directory.
+* In `Mixed-MNL_model_experiment.py` there are 2 commands: `fig_4a_4b()` and `fig_4c_4d()`, which can be imported as a module function to a separate file to generate  `synthetic-ml-on-1cl.csv` and `synthetic-ml-on-2cl.csv` respectively in this directory, or pass your desired destination path with filename into the commands.
 
 The main repository for this paper is located <a href="https://github.com/janovergoor/choose2grow">here</a>.
