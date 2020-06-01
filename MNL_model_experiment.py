@@ -72,7 +72,7 @@ def experiment(kwargs):
   return m.get_model_info()
 
 def write_csv(filename, kwargs_list, result):
-  with open('synthetic-vary-n-and-s.csv','w') as f:
+  with open(filename,'w') as f:
     header = ['num_nodes','graph_id','sampling','data_size','num_neg','i']
     header.extend(['w_{}'.format(i) for i in range(8)])
     header.extend(['se_{}'.format(i) for i in range(8)])
@@ -86,8 +86,8 @@ def write_csv(filename, kwargs_list, result):
 def fig_3a_3b():
   result = None
   kwargs_list = [{'n':n, 's':s, 'sampling':sampling, 'i':i, 'graph_id':parse_info(PATH)['graph_seed'], \
-                  'feature_seed': random.randint(0, 2**31-1),'edge_sampling':'first-n'} \
-                  for n,s,sampling,i in product(range(500,5001,500), [24,96], ['uniform','stratified'], range(50))]
+                  'feature_seed': random.randint(0, 2**31-1),'edge_sampling':'random-uniform'} \
+                  for n,s,sampling,i in product(range(500,5001,500), [24,96], ['uniform','stratified','importance'], range(50))]
   with Pool(4) as p:
     result = p.map(experiment, kwargs_list)
   write_csv('synthetic-vary-n-and-s-very-small.csv', kwargs_list, result)
@@ -95,7 +95,7 @@ def fig_3a_3b():
 def fig_3c():
   result = None
   kwargs_list = [{'n':10000, 's':s, 'sampling':sampling, 'i':i, 'graph_id':parse_info(PATH)['graph_seed'], \
-                  'feature_seed': random.randint(0, 2**31-1),'edge_sampling':'first-n'} \
+                  'feature_seed': random.randint(0, 2**31-1),'edge_sampling':'random-uniform'} \
                   for s,sampling,i in product([3,6,12,24,48,96,192,384,768], ['uniform','stratified','importance'], range(50))]
   with Pool(4) as p:
     result = p.map(experiment, kwargs_list)
@@ -108,7 +108,7 @@ def fig_3d():
                    for s,sampling,i in product([3,6,12,24,48,96,192,384,768], ['uniform','stratified','importance'], range(50))]
   with Pool(4) as p:
     result = p.map(experiment, kwargs_list)
-  write_csv('synthetic-fix-ns-480k-randedge.csv',kwargs_list, result)
+  write_csv('synthetic-fix-ns-480k.csv',kwargs_list, result)
 
 fig_3a_3b()
 fig_3c()
