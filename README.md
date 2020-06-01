@@ -20,20 +20,24 @@ In this part, we used the following versions of external python libraries:
 - `torch=0.4.0` (to accelerate the optimizing routine)
 
 To generate data for figure 3 for conditional logit on synthetic graph, run:
+
     ```
     mkdir MNL-graph
     python3 generate_MNL_graph.py
     python3 MNL_model_experiment.py
     ```    
+    
 * Running the code will generate graph in the folder `MNL-graph` and run all experiments in the one-mode conditional logit section. 
 * In `MNL_model_experiment.py` there are 3 commands: `fig_3a_3b()`, `fig_3c()`, and `fig_3d()`. which can be imported imported as a module function to generate  `synthetic-vary-n-and-s.csv`,`synthetic-fix-n-10k.csv`, and `synthetic-fix-ns-480k.csv` respectively in this directory.
 
 Likewise, to generate data for figure 4 for demixing mixed logit on synthetic graph, run:
+
     ```
     mkdir Mixed-MNL-graph
     python3 generate_Mixed_MNL_graph.py
     python3 Mixed_MNL_model_experiment.py
     ```    
+    
 * Running this will generate another graph in the folder `Mixed-MNL-graph` and run all experiments in the one-mode conditional logit section.
 * In `Mixed-MNL_model_experiment.py` there are 2 commands: `fig_4a_4b()` and `fig_4c_4d()`, which can be imported as a module function to a separate file to generate  `synthetic-ml-on-1cl.csv` and `synthetic-ml-on-2cl.csv` respectively in this directory.
 
