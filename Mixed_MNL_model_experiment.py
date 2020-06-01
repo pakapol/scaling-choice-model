@@ -108,17 +108,17 @@ def write_csv(filename, kwargs_list, result):
       row.extend(info['se'])
       f.write(','.join(map(str, row)) + '\n')
 
-def fig_4a_4b():
+def fig_4a_4b(dest='synthetic-ml-on-1cl.csv'):
   result = None
   kwargs_list = [{'n':80000, 's':s, 'sampling':sampling, 'i':i, 'graph_id':parse_info(PATH)['graph_seed'], \
                   'feature_seed': random.randint(0, 2**31-1),'edge_sampling':'first-n'} \
                   for s,sampling,i in product([16,32,64,128,256,512,1024], ['uniform','stratified'], range(20))]
   with Pool(48) as p:
     result = p.map(experiment_1cl, kwargs_list)
-  write_csv('synthetic-ml-on-1cl.csv',kwargs_list, result)
+  write_csv(dest, kwargs_list, result)
 
 
-def fig_4c_4d():
+def fig_4c_4d(dest='synthetic-ml-on-2cl-big-n-small-s-truncated-feature.csv'):
   result = None
   kwargs_list = [{'n':80000, 's':s, 'sampling':sampling, 'i':i, 'graph_id':parse_info(PATH)['graph_seed'], \
                   'feature_seed': random.randint(0, 2**31-1),'edge_sampling':'first-n'} \
@@ -126,7 +126,7 @@ def fig_4c_4d():
   with Pool(48) as p:
     result = p.map(experiment_2cl, kwargs_list)
 
-  with open('synthetic-ml-on-2cl-big-n-small-s-truncated-feature.csv', 'w') as f:
+  with open(dest, 'w') as f:
     header = ['num_nodes','graph_id','sampling','data_size','num_neg','i']
     header.extend(['w_local_{}'.format(i) for i in range(8)])
     header.extend(['se_local_{}'.format(i) for i in range(8)])
