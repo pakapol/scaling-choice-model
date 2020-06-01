@@ -28,7 +28,7 @@ To generate data for figure 3 for conditional logit on synthetic graph, run:
     ```    
     
 * Running the code will generate graph in the folder `MNL-graph` and run all experiments in the one-mode conditional logit section. 
-* In `MNL_model_experiment.py` there are 3 commands: `fig_3a_3b()`, `fig_3c()`, and `fig_3d()`. which can be imported imported as a module function to generate  `synthetic-vary-n-and-s.csv`,`synthetic-fix-n-10k.csv`, and `synthetic-fix-ns-480k.csv` respectively in this directory.
+* In `MNL_model_experiment.py` there are 3 commands: `fig_3a_3b()`, `fig_3c()`, and `fig_3d()`, which can be imported imported as a module function to generate files `synthetic-vary-n-and-s.csv`,`synthetic-fix-n-10k.csv`, and `synthetic-fix-ns-480k.csv` respectively in a specified directory, or change the destination file path by doing `from MNL_model_experiment import fig_3a_3b; fig_3a_3b("../data/paper2_plot_data/fig_3a_3b.csv")`.
 
 Likewise, to generate data for figure 4 for demixing mixed logit on synthetic graph, run:
 
